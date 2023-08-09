@@ -17,6 +17,7 @@ regBtn.addEventListener("click", function () {
     const apellido = document.getElementById("apellido").value;
     const email = document.getElementById("email").value;
     const terminos = document.getElementById("terminos").checked;
+    const emailRegex = /^[^\s@]+@[^\s@]+.[^\s@]+$/;
 
     if (!nombre || !apellido || !email || !password1.value || !password2.value || !terminos) {
       alertDanger.textContent = "Los datos ingresados no cumplen con los campos solicitados.";
@@ -25,17 +26,23 @@ regBtn.addEventListener("click", function () {
         alertDanger.classList.remove("show");
       }, 3000);
     } else if (password1.value.length < 6) {
-      alertDanger.textContent = "Los datos ingresados no cumplen con los campos solicitados.";
+      alertDanger.textContent = "La contraseña debe tener mínimo 6 caracteres.";
       alertDanger.classList.add("show");
       setTimeout(() => {
         alertDanger.classList.remove("show");
       }, 3000);
     } else if (password1.value !== password2.value) {
-      alertDanger.textContent = "Los datos ingresados no cumplen con los campos solicitados.";
+      alertDanger.textContent = "Las contraseñas no son iguales.";
       alertDanger.classList.add("show");
       setTimeout(() => {
         alertDanger.classList.remove("show");
       }, 3000);
+    } else if (!emailRegex.test(email)) {
+        alertDanger.textContent = "Ingrese un correo electrónico válido.";
+        alertDanger.classList.add("show");
+        setTimeout(() => {
+          alertDanger.classList.remove("show");
+        }, 3000); 
     } else {
       alertSuccess.classList.add("show");
       setTimeout(() => {
