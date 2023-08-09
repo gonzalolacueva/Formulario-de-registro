@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const regBtn = document.getElementById("regBtn");
     const alertSuccess = document.getElementById("alert-success");
     const alertDanger = document.getElementById("alert-danger");
+    const emailRegex = /^[^\s@]+@[^\s@]+.[^\s@]+$/;
 
     regBtn.addEventListener("click", function () {
         const nombre = document.getElementById("nombre").value;
@@ -28,6 +29,12 @@ document.addEventListener("DOMContentLoaded", function () {
             }, 3000);
         } else if (password1.value !== password2.value) {
             alertDanger.textContent = "Los datos ingresados no cumplen con los campos solicitados.";
+            alertDanger.classList.add("show");
+            setTimeout(() => {
+                alertDanger.classList.remove("show");
+            }, 3000);
+        } else if (!emailRegex.test(email)) {
+            alertDanger.textContent = "Ingrese un correo electrónico válido.";
             alertDanger.classList.add("show");
             setTimeout(() => {
                 alertDanger.classList.remove("show");
